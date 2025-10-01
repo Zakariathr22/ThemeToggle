@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ThemeToggle.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ThemeToggle.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Padding="32"
+                Spacing="8">
+        <ComboBox x:Name="ThemeSelector"
+                  Width="200"
+                  ItemsSource="{x:Bind themeOptions}"
+                  SelectedItem="{x:Bind ViewModel.SelectedTheme, Mode=TwoWay}" />
+
+        <Button x:Name="NewWindowButton"
+                Content="Open New Window"
+                Click="NewWindowButton_Click" />
+    </StackPanel>
+</Page>

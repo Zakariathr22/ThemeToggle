@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ThemeToggle (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ThemeToggle (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

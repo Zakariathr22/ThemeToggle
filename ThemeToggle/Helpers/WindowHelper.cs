@@ -35,18 +35,30 @@ public static class WindowHelper
     {
         if (window.Content is FrameworkElement root)
         {
+
             root.RequestedTheme = (ElementTheme)theme;
 
             if (window.AppWindow is not null)
             {
-                Color fg = (ElementTheme)theme == ElementTheme.Light ? Colors.Black : Colors.White;
-                Color hv = (ElementTheme)theme == ElementTheme.Light ? Color.FromArgb(127, 191, 191, 191) : Color.FromArgb(127, 63, 63, 63);
+                ElementTheme effectiveTheme = theme == ThemeOption.Default
+                    ? (Application.Current.RequestedTheme == ApplicationTheme.Dark ? ElementTheme.Dark : ElementTheme.Light)
+                    : (ElementTheme)theme;
+
+                Color fg = effectiveTheme == ElementTheme.Dark ? Colors.White : Colors.Black;
+                Color hv = effectiveTheme == ElementTheme.Dark
+                    ? Color.FromArgb(127, 63, 63, 63)
+                    : Color.FromArgb(127, 191, 191, 191);
+
                 window.AppWindow.TitleBar.ButtonForegroundColor = fg;
                 window.AppWindow.TitleBar.ButtonHoverForegroundColor = fg;
                 window.AppWindow.TitleBar.ButtonHoverBackgroundColor = hv;
 
-                window.AppWindow.TitleBar.PreferredTheme = (ElementTheme)theme == ElementTheme.Light ? TitleBarTheme.Light : TitleBarTheme.Dark;
+                window.AppWindow.TitleBar.PreferredTheme =
+                    effectiveTheme == ElementTheme.Light ? TitleBarTheme.Light :
+                    effectiveTheme == ElementTheme.Dark ? TitleBarTheme.Dark :
+                    TitleBarTheme.UseDefaultAppMode;
             }
         }
     }
+
 }
